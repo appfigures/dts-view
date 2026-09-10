@@ -1,0 +1,55 @@
+name: publish
+
+# Build the .vsix and publish it to the VS Code Marketplace and Open VSX on every `v*` tag.
+# (This file is authored for the standalone repo where the extension is at the repo root.)
+# Cut a release with:  git tag v0.0.1 && git push origin v0.0.1
+#
+# Requires these repo secrets (each publish step is skipped if its secret is absent):
+#   VSCE_PAT – VS Code Marketplace token: an Azure DevOps PAT scoped to Marketplace > Manage.
+#              NOTE: global Azure DevOps PATs retire 2026-12-01 — after that switch to Entra ID auth.
+#   OVSX_PAT – Open VSX token from open-vsx.org (needs a signed Eclipse Publisher Agreement and a
+#              namespace matching the package `publisher`).
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write # to attach the .vsix to a GitHub Release
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Guard against tag/version drift — publishing the wrong version is a pain to undo.
+      - name: Verify tag matches package.json version
+        run: |
+          pkg="v$(node -p "require('./package.json').version")"
+          [ "$pkg" = "$GITHUB_REF_NAME" ] || { echo "Tag $GITHUB_REF_NAME != package.json ($pkg) — bump \"version\" first."; exit 1; }
+
+      - run: npm ci
+      - run: npm run compile
+      - run: npm run package # -> dts-view-<version>.vsix (@vscode/vsce)
+
+      # Publish the exact same artifact to both registries.
+      - name: Publish to VS Code Marketplace
+        if: env.VSCE_PAT != ''
+        run: npx vsce publish --packagePath ./*.vsix
+
+      - name: Publish to Open VSX
+        if: env.OVSX_PAT != ''
+        run: npx ovsx publish ./*.vsix -p "$OVSX_PAT"
+
+      - name: Attach .vsix to a GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" ./*.vsix --title "DTS View $GITHUB_REF_NAME" --generate-notes

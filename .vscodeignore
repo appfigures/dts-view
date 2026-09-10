@@ -1,0 +1,16 @@
+# Keep the .vsix to runtime files only. Note: do NOT add a blanket `**/*.ts` — that would drop
+# the `lib.*.d.ts` files inside node_modules/typescript that the compiler reads for global types.
+.vscode/**
+.github/**
+src/**
+icon.svg
+tsconfig.json
+.gitignore
+.npmrc
+pnpm-lock.yaml
+pnpm-workspace.yaml
+package-lock.json
+**/*.map
+**/*.vsix
+**/*.tsbuildinfo
+.git/**

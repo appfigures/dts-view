@@ -1,0 +1,59 @@
+{
+	"name": "dts-view",
+	"displayName": "DTS View",
+	"description": "Preview the generated .d.ts declaration for the active .ts/.tsx file in a read-only panel beside the source — follows the active editor and updates as you type.",
+	"version": "0.0.1",
+	"publisher": "oztune",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Visualization",
+		"Other"
+	],
+	"keywords": [
+		"typescript",
+		"d.ts",
+		"declaration",
+		"dts",
+		"preview"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/oztune/dts-view.git"
+	},
+	"homepage": "https://github.com/oztune/dts-view#readme",
+	"bugs": {
+		"url": "https://github.com/oztune/dts-view/issues"
+	},
+	"main": "./out/extension.js",
+	"activationEvents": [],
+	"contributes": {
+		"commands": [
+			{
+				"command": "dts-view.openBeside",
+				"title": "Open Beside",
+				"category": "DTS View"
+			}
+		]
+	},
+	"scripts": {
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"vscode:prepublish": "npm run compile",
+		"package": "vsce package",
+		"publish:vsce": "vsce publish",
+		"publish:ovsx": "ovsx publish"
+	},
+	"dependencies": {
+		"typescript": "^5.9.3"
+	},
+	"devDependencies": {
+		"@types/node": "^22.10.2",
+		"@types/vscode": "1.85.0",
+		"@vscode/vsce": "^3.9.2",
+		"ovsx": "^1.1.1"
+	}
+}

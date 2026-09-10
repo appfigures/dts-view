@@ -1,7 +1,7 @@
 # DTS View
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/oztune.dts-view?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=oztune.dts-view)
-[![Open VSX](https://img.shields.io/open-vsx/v/oztune/dts-view?label=Open%20VSX)](https://open-vsx.org/extension/oztune/dts-view)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Appfigures.dts-view?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=Appfigures.dts-view)
+[![Open VSX](https://img.shields.io/open-vsx/v/Appfigures/dts-view?label=Open%20VSX)](https://open-vsx.org/extension/Appfigures/dts-view)
 
 A tiny VS Code extension with one command:
 
@@ -28,9 +28,9 @@ Open the Extensions view and search **DTS View** — VS Code pulls from the Mark
 VSCodium, and Gitpod pull from Open VSX. Or from the command line:
 
 ```bash
-code   --install-extension oztune.dts-view   # VS Code
-cursor --install-extension oztune.dts-view   # Cursor
-codium --install-extension oztune.dts-view   # VSCodium
+code   --install-extension Appfigures.dts-view   # VS Code
+cursor --install-extension Appfigures.dts-view   # Cursor
+codium --install-extension Appfigures.dts-view   # VSCodium
 ```
 
 Then open a `.ts`/`.tsx` file and run **DTS View: Open Beside** (`Cmd/Ctrl+Shift+P`). Updates arrive
@@ -96,11 +96,11 @@ One-time setup:
 1. **Icon** — export `icon.svg` to a 128×128 `icon.png` and add `"icon": "icon.png"` to
    `package.json` (Marketplace listings look unfinished without one), e.g.
    `npx svgexport icon.svg icon.png 128:128`.
-2. **Marketplace token** — create a publisher named `oztune` (Azure DevOps), generate a PAT scoped
+2. **Marketplace token** — create a publisher named `Appfigures` (Azure DevOps), generate a PAT scoped
    to *Marketplace → Manage*, and add it as the repo secret `VSCE_PAT`. ⚠️ Global Azure DevOps PATs
    retire **2026-12-01** — after that, switch CI to Microsoft Entra ID auth.
-3. **Open VSX token** — sign the Eclipse Publisher Agreement at open-vsx.org, create the `oztune`
-   namespace (`npx ovsx create-namespace oztune -p <token>`), and add the token as `OVSX_PAT`.
+3. **Open VSX token** — sign the Eclipse Publisher Agreement at open-vsx.org, create the `Appfigures`
+   namespace (`npx ovsx create-namespace Appfigures -p <token>`), and add the token as `OVSX_PAT`.
 
 To publish by hand instead of via CI: `npx vsce publish -p <VSCE_PAT>` and
 `npx ovsx publish dts-view-<version>.vsix -p <OVSX_PAT>`.

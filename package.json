@@ -3,7 +3,7 @@
 	"displayName": "DTS View",
 	"description": "Preview the generated .d.ts declaration for the active .ts/.tsx file in a read-only panel beside the source — follows the active editor and updates as you type.",
 	"version": "0.0.1",
-	"publisher": "oztune",
+	"publisher": "Appfigures",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.85.0"
@@ -22,11 +22,11 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/oztune/dts-view.git"
+		"url": "https://github.com/appfigures/dts-view.git"
 	},
-	"homepage": "https://github.com/oztune/dts-view#readme",
+	"homepage": "https://github.com/appfigures/dts-view#readme",
 	"bugs": {
-		"url": "https://github.com/oztune/dts-view/issues"
+		"url": "https://github.com/appfigures/dts-view/issues"
 	},
 	"main": "./out/extension.js",
 	"activationEvents": [],
